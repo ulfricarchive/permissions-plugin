@@ -1,0 +1,5 @@
+name: Blockade
+main: com.ulfric.blockade.Blockade
+version: 1.0.0
+load: STARTUP
+depend: [Platform]

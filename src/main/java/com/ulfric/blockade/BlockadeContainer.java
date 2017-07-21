@@ -10,10 +10,10 @@ import com.ulfric.platform.service.Services;
 public class BlockadeContainer extends Container {
 
 	public BlockadeContainer() {
+		addShutdownHook(this::saveEntities);
+
 		install(PersistentPermissions.class);
 		install(BlockadeListener.class);
-
-		addShutdownHook(this::saveEntities);
 	}
 
 	private void saveEntities() { // TODO log sizes

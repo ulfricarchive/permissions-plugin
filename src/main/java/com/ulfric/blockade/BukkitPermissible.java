@@ -31,7 +31,7 @@ final class BukkitPermissible extends PermissibleBase {
 
 	@Override
 	public boolean isPermissionSet(String node) {
-		return entity.testPermission(node) != Allowance.UNKNOWN;
+		return entity.testPermission(node) != Allowance.UNDEFINED;
 	}
 
 	@Override

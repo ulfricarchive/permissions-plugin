@@ -1,7 +1,7 @@
 package com.ulfric.blockade.command;
 
-import com.ulfric.andrew.Argument;
 import com.ulfric.andrew.Context;
+import com.ulfric.andrew.argument.Argument;
 import com.ulfric.embargo.limit.Limit;
 
 import java.util.Map;

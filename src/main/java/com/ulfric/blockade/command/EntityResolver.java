@@ -1,7 +1,7 @@
 package com.ulfric.blockade.command;
 
-import com.ulfric.andrew.ResolutionRequest;
-import com.ulfric.andrew.Resolver;
+import com.ulfric.andrew.argument.ResolutionRequest;
+import com.ulfric.andrew.argument.Resolver;
 import com.ulfric.embargo.PermissionsService;
 import com.ulfric.embargo.entity.Entity;
 import com.ulfric.platform.service.Services;

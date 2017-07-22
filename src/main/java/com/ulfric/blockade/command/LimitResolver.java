@@ -2,8 +2,8 @@ package com.ulfric.blockade.command;
 
 import org.apache.commons.lang3.EnumUtils;
 
-import com.ulfric.andrew.ResolutionRequest;
-import com.ulfric.andrew.Resolver;
+import com.ulfric.andrew.argument.ResolutionRequest;
+import com.ulfric.andrew.argument.Resolver;
 import com.ulfric.embargo.limit.IntegerLimit;
 import com.ulfric.embargo.limit.Limit;
 import com.ulfric.embargo.limit.StandardLimits;

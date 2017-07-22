@@ -1,9 +1,9 @@
 package com.ulfric.blockade.command;
 
 import com.ulfric.andrew.Alias;
-import com.ulfric.andrew.Argument;
 import com.ulfric.andrew.Context;
 import com.ulfric.andrew.Permission;
+import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.entity.Entity;
 

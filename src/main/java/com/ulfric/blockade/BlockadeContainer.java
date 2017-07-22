@@ -36,6 +36,7 @@ public class BlockadeContainer extends Container {
 
 		install(EntityResolver.class);
 		install(LimitResolver.class);
+
 		install(BlockadeCommand.class);
 		install(BlockadeEntityCommand.class);
 		install(BlockadeEntityRecalculateCommand.class);
@@ -58,15 +59,11 @@ public class BlockadeContainer extends Container {
 	private void saveEntities() { // TODO log sizes
 		PermissionsService service = Services.get(PermissionsService.class);
 
-		service.getActiveGroups().stream()
-			.filter(PersistentGroup.class::isInstance)
-			.map(PersistentGroup.class::cast)
-			.forEach(PersistentGroup::write);
+		service.getActiveGroups().stream().filter(PersistentGroup.class::isInstance).map(PersistentGroup.class::cast)
+		        .forEach(PersistentGroup::write);
 
-		service.getActiveUsers().stream()
-			.filter(PersistentUser.class::isInstance)
-			.map(PersistentUser.class::cast)
-			.forEach(PersistentUser::write);
+		service.getActiveUsers().stream().filter(PersistentUser.class::isInstance).map(PersistentUser.class::cast)
+		        .forEach(PersistentUser::write);
 	}
 
 }

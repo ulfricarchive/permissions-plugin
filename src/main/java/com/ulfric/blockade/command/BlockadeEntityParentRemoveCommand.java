@@ -8,8 +8,8 @@ import com.ulfric.embargo.entity.Entity;
 
 import java.util.Map;
 
-@Name("add")
-@Permission("blockade.use.entity.parent.add")
+@Name("remove")
+@Permission("blockade.use.entity.parent.remove")
 public class BlockadeEntityParentRemoveCommand extends BlockadeEntityParentCommand {
 
 	@Argument

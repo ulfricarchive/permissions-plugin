@@ -1,11 +1,15 @@
 package com.ulfric.blockade.command;
 
 import com.ulfric.andrew.Context;
+import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
+import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.limit.Limit;
 
 import java.util.Map;
 
+@Name("decrease")
+@Permission("blockade.use.entity.limit.decrease")
 public class BlockadeEntityLimitDecreaseCommand extends BlockadeEntityLimitCommand {
 
 	@Argument

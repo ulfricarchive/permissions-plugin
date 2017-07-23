@@ -1,8 +1,12 @@
 package com.ulfric.blockade.command;
 
 import com.ulfric.andrew.Context;
+import com.ulfric.andrew.Permission;
+import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.limit.StandardLimits;
 
+@Name("clear")
+@Permission("blockade.use.entity.limit.clear")
 public class BlockadeEntityLimitClearCommand extends BlockadeEntityLimitCommand {
 
 	@Override

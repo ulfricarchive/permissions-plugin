@@ -58,6 +58,9 @@ public class BlockadeContainer extends Container {
 
 	private void saveEntities() { // TODO log sizes
 		PermissionsService service = Services.get(PermissionsService.class);
+		if (service == null) {
+			throw new IllegalStateException("Could not find PermissionsService");
+		}
 
 		service.getActiveGroups().stream().filter(PersistentGroup.class::isInstance).map(PersistentGroup.class::cast)
 		        .forEach(PersistentGroup::write);

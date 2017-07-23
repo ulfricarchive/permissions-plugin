@@ -59,7 +59,11 @@ public class BlockadeListener implements Listener {
 	}
 
 	private User getPermissionsData(String name, UUID uniqueId) {
-		return Services.get(PermissionsService.class).createUser(uniqueId, name);
+		PermissionsService service = Services.get(PermissionsService.class);
+		if (service == null) {
+			return null;
+		}
+		return service.createUser(uniqueId, name);
 	}
 
 	private MethodHandle setter(Player player) {

@@ -89,6 +89,11 @@ final class EntityPersistence {
 			return;
 		}
 
+		PermissionsService service = Services.get(PermissionsService.class);
+		if (service == null) {
+			return; // TODO better handling of this possible scenario
+		}
+
 		for (String entry : entries) {
 			if (entry.isEmpty()) {
 				continue;
@@ -96,7 +101,7 @@ final class EntityPersistence {
 			if (entry.startsWith("group/")) {
 				entry = entry.substring("group/".length());
 			}
-			Group group = Services.get(PermissionsService.class).createGroupByName(entry); // TODO validate not self
+			Group group = service.createGroupByName(entry); // TODO validate not self
 			if (group == null) {
 				continue;
 			}

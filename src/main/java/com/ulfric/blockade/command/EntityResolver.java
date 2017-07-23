@@ -2,9 +2,9 @@ package com.ulfric.blockade.command;
 
 import com.ulfric.andrew.argument.ResolutionRequest;
 import com.ulfric.andrew.argument.Resolver;
-import com.ulfric.embargo.PermissionsService;
 import com.ulfric.embargo.entity.Entity;
-import com.ulfric.platform.service.Services;
+import com.ulfric.servix.Services;
+import com.ulfric.servix.services.PermissionsService;
 
 public class EntityResolver extends Resolver<Entity> {
 

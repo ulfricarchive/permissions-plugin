@@ -10,9 +10,9 @@ import com.ulfric.commons.reflect.FieldHelper;
 import com.ulfric.data.database.Database;
 import com.ulfric.data.database.Store;
 import com.ulfric.dragoon.reflect.Handles;
-import com.ulfric.embargo.PermissionsService;
 import com.ulfric.embargo.entity.User;
-import com.ulfric.platform.service.Services;
+import com.ulfric.servix.Services;
+import com.ulfric.servix.services.PermissionsService;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Field;

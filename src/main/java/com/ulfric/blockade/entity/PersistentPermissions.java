@@ -3,9 +3,9 @@ package com.ulfric.blockade.entity;
 import com.ulfric.commons.service.Service;
 import com.ulfric.data.database.Database;
 import com.ulfric.data.database.Store;
-import com.ulfric.embargo.PermissionsService;
 import com.ulfric.embargo.entity.Group;
 import com.ulfric.embargo.entity.User;
+import com.ulfric.servix.services.PermissionsService;
 
 import java.util.ArrayList;
 import java.util.List;

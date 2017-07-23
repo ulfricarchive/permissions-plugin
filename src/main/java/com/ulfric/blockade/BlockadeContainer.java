@@ -23,8 +23,8 @@ import com.ulfric.blockade.entity.PersistentGroup;
 import com.ulfric.blockade.entity.PersistentPermissions;
 import com.ulfric.blockade.entity.PersistentUser;
 import com.ulfric.dragoon.application.Container;
-import com.ulfric.embargo.PermissionsService;
-import com.ulfric.platform.service.Services;
+import com.ulfric.servix.Services;
+import com.ulfric.servix.services.PermissionsService;
 
 public class BlockadeContainer extends Container {
 

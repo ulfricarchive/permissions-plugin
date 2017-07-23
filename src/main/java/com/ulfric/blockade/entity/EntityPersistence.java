@@ -4,14 +4,14 @@ import org.apache.commons.collections4.trie.PatriciaTrie;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ulfric.data.database.Data;
-import com.ulfric.embargo.PermissionsService;
 import com.ulfric.embargo.entity.Entity;
 import com.ulfric.embargo.entity.Group;
 import com.ulfric.embargo.limit.IntegerLimit;
 import com.ulfric.embargo.limit.Limit;
 import com.ulfric.embargo.limit.StandardLimits;
 import com.ulfric.embargo.node.Allowance;
-import com.ulfric.platform.service.Services;
+import com.ulfric.servix.Services;
+import com.ulfric.servix.services.PermissionsService;
 
 import java.util.LinkedHashMap;
 import java.util.List;

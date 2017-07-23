@@ -74,7 +74,12 @@ final class EntityPersistence {
 			boolean integer = limitString.startsWith("int/");
 			if (integer) {
 				limitString = limitString.substring("int/".length());
-				limit = IntegerLimit.of(Integer.parseInt(limitString));
+				int limitInt = Integer.parseInt(limitString);
+				if (limitInt < 1) {
+					limit = StandardLimits.NONE;
+				} else {
+					limit = IntegerLimit.of(Integer.parseInt(limitString));
+				}
 			} else {
 				limit = StandardLimits.valueOf(limitString);
 			}

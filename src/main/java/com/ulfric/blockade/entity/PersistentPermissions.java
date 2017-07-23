@@ -4,7 +4,6 @@ import com.ulfric.data.database.Database;
 import com.ulfric.data.database.Store;
 import com.ulfric.embargo.entity.Group;
 import com.ulfric.embargo.entity.User;
-import com.ulfric.servix.Service;
 import com.ulfric.servix.services.permissions.PermissionsService;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class PersistentPermissions implements PermissionsService { // TODO threa
 	private Store users;
 
 	@Override
-	public Class<? extends Service> getService() {
+	public Class<PermissionsService> getService() {
 		return PermissionsService.class;
 	}
 

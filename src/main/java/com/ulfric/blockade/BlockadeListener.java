@@ -11,8 +11,7 @@ import com.ulfric.data.database.Database;
 import com.ulfric.data.database.Store;
 import com.ulfric.dragoon.reflect.Handles;
 import com.ulfric.embargo.entity.User;
-import com.ulfric.servix.Services;
-import com.ulfric.servix.services.PermissionsService;
+import com.ulfric.servix.services.permissions.PermissionsService;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Field;
@@ -59,7 +58,7 @@ public class BlockadeListener implements Listener {
 	}
 
 	private User getPermissionsData(String name, UUID uniqueId) {
-		PermissionsService service = Services.get(PermissionsService.class);
+		PermissionsService service = PermissionsService.get();
 		if (service == null) {
 			return null;
 		}

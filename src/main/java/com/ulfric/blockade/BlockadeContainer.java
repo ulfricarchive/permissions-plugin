@@ -23,8 +23,7 @@ import com.ulfric.blockade.entity.PersistentGroup;
 import com.ulfric.blockade.entity.PersistentPermissions;
 import com.ulfric.blockade.entity.PersistentUser;
 import com.ulfric.dragoon.application.Container;
-import com.ulfric.servix.Services;
-import com.ulfric.servix.services.PermissionsService;
+import com.ulfric.servix.services.permissions.PermissionsService;
 
 public class BlockadeContainer extends Container {
 
@@ -57,7 +56,7 @@ public class BlockadeContainer extends Container {
 	}
 
 	private void saveEntities() { // TODO log sizes
-		PermissionsService service = Services.get(PermissionsService.class);
+		PermissionsService service = PermissionsService.get();
 		if (service == null) {
 			throw new IllegalStateException("Could not find PermissionsService");
 		}

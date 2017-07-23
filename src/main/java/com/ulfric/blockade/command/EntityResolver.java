@@ -3,8 +3,7 @@ package com.ulfric.blockade.command;
 import com.ulfric.andrew.argument.ResolutionRequest;
 import com.ulfric.andrew.argument.Resolver;
 import com.ulfric.embargo.entity.Entity;
-import com.ulfric.servix.Services;
-import com.ulfric.servix.services.PermissionsService;
+import com.ulfric.servix.services.permissions.PermissionsService;
 
 public class EntityResolver extends Resolver<Entity> {
 
@@ -14,7 +13,7 @@ public class EntityResolver extends Resolver<Entity> {
 
 	@Override
 	public Entity apply(ResolutionRequest resolution) { // TODO support UUID, creating users, ensure persistent
-		PermissionsService service = Services.get(PermissionsService.class);
+		PermissionsService service = PermissionsService.get();
 		if (service == null) {
 			return null;
 		}

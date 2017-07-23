@@ -10,8 +10,7 @@ import com.ulfric.embargo.limit.IntegerLimit;
 import com.ulfric.embargo.limit.Limit;
 import com.ulfric.embargo.limit.StandardLimits;
 import com.ulfric.embargo.node.Allowance;
-import com.ulfric.servix.Services;
-import com.ulfric.servix.services.PermissionsService;
+import com.ulfric.servix.services.permissions.PermissionsService;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -89,7 +88,7 @@ final class EntityPersistence {
 			return;
 		}
 
-		PermissionsService service = Services.get(PermissionsService.class);
+		PermissionsService service = PermissionsService.get();
 		if (service == null) {
 			return; // TODO better handling of this possible scenario
 		}

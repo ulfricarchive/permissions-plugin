@@ -13,7 +13,6 @@
 	<groupId>com.ulfric.blockade</groupId>
 	<artifactId>blockade</artifactId>
 	<version>1.0.0</version>
-	<name>Blockade</name>
 
 	<dependencies>
 		<dependency>

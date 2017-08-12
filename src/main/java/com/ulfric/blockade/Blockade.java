@@ -22,7 +22,7 @@ import com.ulfric.blockade.command.LimitResolver;
 import com.ulfric.blockade.entity.PersistentGroup;
 import com.ulfric.blockade.entity.PersistentPermissions;
 import com.ulfric.blockade.entity.PersistentUser;
-import com.ulfric.platform.Plugin;
+import com.ulfric.plugin.Plugin;
 import com.ulfric.servix.services.permissions.PermissionsService;
 
 public class Blockade extends Plugin {

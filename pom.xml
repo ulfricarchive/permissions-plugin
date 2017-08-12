@@ -16,29 +16,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.ulfric.embargo</groupId>
-			<artifactId>embargo</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.ulfric.data</groupId>
-			<artifactId>data</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.ulfric.platform</groupId>
-			<artifactId>platform</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.ulfric.servix</groupId>
-			<artifactId>servix</artifactId>
+			<groupId>com.ulfric.plugin</groupId>
+			<artifactId>plugin</artifactId>
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>

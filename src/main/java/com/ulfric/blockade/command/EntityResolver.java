@@ -2,10 +2,14 @@ package com.ulfric.blockade.command;
 
 import com.ulfric.andrew.argument.ResolutionRequest;
 import com.ulfric.andrew.argument.Resolver;
+import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.embargo.entity.Entity;
 import com.ulfric.servix.services.permissions.PermissionsService;
 
 public class EntityResolver extends Resolver<Entity> {
+
+	@Inject
+	private PermissionsService service;
 
 	public EntityResolver() {
 		super(Entity.class);
@@ -13,11 +17,6 @@ public class EntityResolver extends Resolver<Entity> {
 
 	@Override
 	public Entity apply(ResolutionRequest resolution) { // TODO support UUID, creating users, ensure persistent
-		PermissionsService service = PermissionsService.get();
-		if (service == null) {
-			return null;
-		}
-
 		String argument = resolution.getArgument();
 		int split = argument.indexOf(':');
 		if (split != -1) {

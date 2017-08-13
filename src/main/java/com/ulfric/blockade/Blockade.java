@@ -30,11 +30,11 @@ public class Blockade extends Plugin {
 	public Blockade() {
 		addShutdownHook(this::saveEntities);
 
-		install(PersistentPermissions.class);
-		install(BlockadeListener.class);
-
 		install(EntityResolver.class);
 		install(LimitResolver.class);
+
+		install(PersistentPermissions.class);
+		install(BlockadeListener.class);
 
 		install(BlockadeCommand.class);
 		install(BlockadeEntityCommand.class);

@@ -5,8 +5,7 @@ import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.entity.Entity;
-
-import java.util.Map;
+import com.ulfric.i18n.content.Details;
 
 @Name("test")
 @Permission("blockade.use.entity.parent.test")
@@ -17,16 +16,16 @@ public class BlockadeEntityParentTestCommand extends BlockadeEntityParentCommand
 
 	@Override
 	public void run(Context context) {
-		Map<String, String> details = details();
-		details.put("test", Boolean.toString(entity.hasParent(parent)));
+		Details details = details();
+		details.add("test", Boolean.toString(entity.hasParent(parent)));
 		context.getSender().sendMessage("blockade-parent-test", details);
 	}
 
 	@Override
-	protected Map<String, String> details() {
-		Map<String, String> details = super.details();
-		details.put("parentName", parent.getName());
-		details.put("parentUuid", parent.getUniqueId().toString());
+	protected Details details() {
+		Details details = super.details();
+		details.add("parentName", parent.getName());
+		details.add("parentUuid", parent.getUniqueId().toString());
 		return details;
 	}
 

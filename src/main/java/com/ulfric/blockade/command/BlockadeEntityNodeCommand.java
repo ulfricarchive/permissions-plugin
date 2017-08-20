@@ -4,8 +4,7 @@ import com.ulfric.andrew.Context;
 import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
-
-import java.util.Map;
+import com.ulfric.i18n.content.Details;
 
 @Name("node")
 @Permission("blockade.use.entity.node")
@@ -16,15 +15,15 @@ public class BlockadeEntityNodeCommand extends BlockadeEntityCommand {
 
 	@Override
 	public void run(Context context) {
-		Map<String, String> details = details();
-		details.put("test", entity.testPermission(node).name().toLowerCase());
+		Details details = details();
+		details.add("test", entity.testPermission(node).name().toLowerCase());
 		context.getSender().sendMessage("blockade-node-test", details);
 	}
 
 	@Override
-	protected Map<String, String> details() {
-		Map<String, String> details = super.details();
-		details.put("node", node);
+	protected Details details() {
+		Details details = super.details();
+		details.add("node", node);
 		return details;
 	}
 

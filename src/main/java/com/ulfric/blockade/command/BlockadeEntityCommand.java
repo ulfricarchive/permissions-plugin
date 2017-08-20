@@ -6,9 +6,7 @@ import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.entity.Entity;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.ulfric.i18n.content.Details;
 
 @Name("entity")
 @Alias("ent")
@@ -23,10 +21,10 @@ public class BlockadeEntityCommand extends BlockadeCommand {
 		// TODO send info about entity
 	}
 
-	protected Map<String, String> details() {
-		Map<String, String> details = new HashMap<>();
-		details.put("name", entity.getName());
-		details.put("uuid", entity.getUniqueId().toString());
+	protected Details details() {
+		Details details = new Details();
+		details.add("name", entity.getName());
+		details.add("uuid", entity.getUniqueId().toString());
 		return details;
 	}
 

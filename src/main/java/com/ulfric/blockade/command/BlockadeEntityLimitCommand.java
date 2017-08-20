@@ -4,8 +4,7 @@ import com.ulfric.andrew.Context;
 import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
-
-import java.util.Map;
+import com.ulfric.i18n.content.Details;
 
 @Name("limit")
 @Permission("blockade.use.entity.limit")
@@ -16,15 +15,15 @@ public class BlockadeEntityLimitCommand extends BlockadeEntityCommand {
 
 	@Override
 	public void run(Context context) {
-		Map<String, String> details = details();
-		details.put("test", entity.getLimit(node).toString());
+		Details details = details();
+		details.add("test", entity.getLimit(node).toString());
 		context.getSender().sendMessage("blockade-limit-test", details);
 	}
 
 	@Override
-	protected Map<String, String> details() {
-		Map<String, String> details = super.details();
-		details.put("node", node);
+	protected Details details() {
+		Details details = super.details();
+		details.add("node", node);
 		return details;
 	}
 

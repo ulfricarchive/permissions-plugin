@@ -4,9 +4,9 @@ import com.ulfric.andrew.Context;
 import com.ulfric.andrew.Permission;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.entity.Entity;
+import com.ulfric.i18n.content.Details;
 
 import java.util.List;
-import java.util.Map;
 
 @Name("reset")
 @Permission("blockade.use.entity.parent.reset")
@@ -16,8 +16,8 @@ public class BlockadeEntityParentResetCommand extends BlockadeEntityParentComman
 	public void run(Context context) {
 		List<Entity> parents = entity.getParents();
 		parents.forEach(entity::removeParent);
-		Map<String, String> details = details();
-		details.put("parentsCount", Integer.toString(details.size()));
+		Details details = details();
+		details.add("parentsCount", Integer.toString(parents.size()));
 		context.getSender().sendMessage("blockade-parent-reset", details);
 	}
 

@@ -6,6 +6,7 @@ import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.limit.Limit;
 import com.ulfric.i18n.content.Details;
+import com.ulfric.servix.services.locale.TellService;
 
 @Name("decrease")
 @Permission("blockade.use.entity.limit.decrease")
@@ -20,7 +21,7 @@ public class BlockadeEntityLimitDecreaseCommand extends BlockadeEntityLimitComma
 		entity.setLimit(node, newLimit);
 		Details details = details();
 		details.add("newLimit", newLimit.toString());
-		context.getSender().sendMessage("blockade-limit-decrease", details);
+		TellService.sendMessage(context.getSender(), "blockade-limit-decrease", details);
 	}
 
 	@Override

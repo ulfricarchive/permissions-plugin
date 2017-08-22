@@ -5,6 +5,7 @@ import com.ulfric.andrew.Permission;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.entity.Entity;
 import com.ulfric.i18n.content.Details;
+import com.ulfric.servix.services.locale.TellService;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class BlockadeEntityParentResetCommand extends BlockadeEntityParentComman
 		parents.forEach(entity::removeParent);
 		Details details = details();
 		details.add("parentsCount", Integer.toString(parents.size()));
-		context.getSender().sendMessage("blockade-parent-reset", details);
+		TellService.sendMessage(context.getSender(), "blockade-parent-reset", details);
 	}
 
 }

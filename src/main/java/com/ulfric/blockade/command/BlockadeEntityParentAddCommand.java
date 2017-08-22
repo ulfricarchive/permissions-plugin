@@ -6,6 +6,7 @@ import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.entity.Entity;
 import com.ulfric.i18n.content.Details;
+import com.ulfric.servix.services.locale.TellService;
 
 @Name("add")
 @Permission("blockade.use.entity.parent.add")
@@ -17,7 +18,7 @@ public class BlockadeEntityParentAddCommand extends BlockadeEntityParentCommand 
 	@Override
 	public void run(Context context) {
 		entity.addParent(parent);
-		context.getSender().sendMessage("blockade-parent-add", details());
+		TellService.sendMessage(context.getSender(), "blockade-parent-add", details());
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.i18n.content.Details;
+import com.ulfric.servix.services.locale.TellService;
 
 @Name("node")
 @Permission("blockade.use.entity.node")
@@ -17,7 +18,7 @@ public class BlockadeEntityNodeCommand extends BlockadeEntityCommand {
 	public void run(Context context) {
 		Details details = details();
 		details.add("test", entity.testPermission(node).name().toLowerCase());
-		context.getSender().sendMessage("blockade-node-test", details);
+		TellService.sendMessage(context.getSender(), "blockade-node-test", details);
 	}
 
 	@Override

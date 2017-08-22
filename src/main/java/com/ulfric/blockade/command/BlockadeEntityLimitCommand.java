@@ -5,6 +5,7 @@ import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.i18n.content.Details;
+import com.ulfric.servix.services.locale.TellService;
 
 @Name("limit")
 @Permission("blockade.use.entity.limit")
@@ -17,7 +18,7 @@ public class BlockadeEntityLimitCommand extends BlockadeEntityCommand {
 	public void run(Context context) {
 		Details details = details();
 		details.add("test", entity.getLimit(node).toString());
-		context.getSender().sendMessage("blockade-limit-test", details);
+		TellService.sendMessage(context.getSender(), "blockade-limit-test", details);
 	}
 
 	@Override

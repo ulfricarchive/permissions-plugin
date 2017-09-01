@@ -6,14 +6,14 @@ import com.ulfric.commons.naming.Name;
 import com.ulfric.embargo.node.Allowance;
 import com.ulfric.servix.services.locale.TellService;
 
-@Name("clear")
-@Permission("blockade.use.entity.node.clear")
-public class BlockadeEntityNodeClearCommand extends BlockadeEntityNodeCommand {
+@Name("grant")
+@Permission("permission.use.entity.node.grant")
+public class PermissionEntityNodeGrantCommand extends PermissionEntityNodeCommand {
 
 	@Override
 	public void run(Context context) {
-		entity.setPermission(node, Allowance.UNDEFINED);
-		TellService.sendMessage(context.getSender(), "blockade-node-clear", details());
+		entity.setPermission(node, Allowance.ALLOWED);
+		TellService.sendMessage(context.getSender(), "blockade-node-grant", details());
 	}
 
 }

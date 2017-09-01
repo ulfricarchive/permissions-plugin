@@ -10,8 +10,8 @@ import com.ulfric.i18n.content.Details;
 
 @Name("entity")
 @Alias("ent")
-@Permission("blockade.use.entity")
-public class BlockadeEntityCommand extends BlockadeCommand {
+@Permission("permission.use.entity")
+public class PermissionEntityCommand extends PermissionCommand {
 
 	@Argument
 	protected Entity entity;

@@ -4,28 +4,27 @@ import com.ulfric.andrew.Context;
 import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
-import com.ulfric.embargo.entity.Entity;
 import com.ulfric.i18n.content.Details;
 import com.ulfric.servix.services.locale.TellService;
 
-@Name("remove")
-@Permission("blockade.use.entity.parent.remove")
-public class BlockadeEntityParentRemoveCommand extends BlockadeEntityParentCommand {
+@Name("limit")
+@Permission("permission.use.entity.limit")
+public class PermissionEntityLimitCommand extends PermissionEntityCommand {
 
 	@Argument
-	protected Entity parent;
+	protected String node;
 
 	@Override
 	public void run(Context context) {
-		entity.removeParent(parent);
-		TellService.sendMessage(context.getSender(), "blockade-parent-remove", details());
+		Details details = details();
+		details.add("test", entity.getLimit(node).toString());
+		TellService.sendMessage(context.getSender(), "blockade-limit-test", details);
 	}
 
 	@Override
 	protected Details details() {
 		Details details = super.details();
-		details.add("parentName", parent.getName());
-		details.add("parentUuid", parent.getUniqueId().toString());
+		details.add("node", node);
 		return details;
 	}
 

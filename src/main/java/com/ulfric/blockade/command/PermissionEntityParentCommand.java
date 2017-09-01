@@ -5,8 +5,8 @@ import com.ulfric.andrew.Permission;
 import com.ulfric.commons.naming.Name;
 
 @Name("parent")
-@Permission("blockade.use.entity.parent")
-public class BlockadeEntityParentCommand extends BlockadeEntityCommand {
+@Permission("permission.use.entity.parent")
+public class PermissionEntityParentCommand extends PermissionEntityCommand {
 
 	@Override
 	public void run(Context context) {

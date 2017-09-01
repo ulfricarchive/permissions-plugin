@@ -4,27 +4,29 @@ import com.ulfric.andrew.Context;
 import com.ulfric.andrew.Permission;
 import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
+import com.ulfric.embargo.entity.Entity;
 import com.ulfric.i18n.content.Details;
 import com.ulfric.servix.services.locale.TellService;
 
-@Name("node")
-@Permission("blockade.use.entity.node")
-public class BlockadeEntityNodeCommand extends BlockadeEntityCommand {
+@Name("test")
+@Permission("permission.use.entity.parent.test")
+public class PermissionEntityParentTestCommand extends PermissionEntityParentCommand {
 
 	@Argument
-	protected String node;
+	protected Entity parent;
 
 	@Override
 	public void run(Context context) {
 		Details details = details();
-		details.add("test", entity.testPermission(node).name().toLowerCase());
-		TellService.sendMessage(context.getSender(), "blockade-node-test", details);
+		details.add("test", Boolean.toString(entity.hasParent(parent)));
+		TellService.sendMessage(context.getSender(), "blockade-parent-test", details);
 	}
 
 	@Override
 	protected Details details() {
 		Details details = super.details();
-		details.add("node", node);
+		details.add("parentName", parent.getName());
+		details.add("parentUuid", parent.getUniqueId().toString());
 		return details;
 	}
 

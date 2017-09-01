@@ -10,8 +10,8 @@ import com.ulfric.servix.services.locale.TellService;
 import java.util.List;
 
 @Name("reset")
-@Permission("blockade.use.entity.parent.reset")
-public class BlockadeEntityParentResetCommand extends BlockadeEntityParentCommand {
+@Permission("permission.use.entity.parent.reset")
+public class PermissionEntityParentResetCommand extends PermissionEntityParentCommand {
 
 	@Override
 	public void run(Context context) {

@@ -7,8 +7,8 @@ import com.ulfric.embargo.limit.StandardLimits;
 import com.ulfric.servix.services.locale.TellService;
 
 @Name("clear")
-@Permission("blockade.use.entity.limit.clear")
-public class BlockadeEntityLimitClearCommand extends BlockadeEntityLimitCommand {
+@Permission("permission.use.entity.limit.clear")
+public class PermissionEntityLimitClearCommand extends PermissionEntityLimitCommand {
 
 	@Override
 	public void run(Context context) {

@@ -9,8 +9,8 @@ import com.ulfric.i18n.content.Details;
 import com.ulfric.servix.services.locale.TellService;
 
 @Name("increase")
-@Permission("blockade.use.entity.limit.increase")
-public class BlockadeEntityLimitIncreaseCommand extends BlockadeEntityLimitCommand {
+@Permission("permission.use.entity.limit.increase")
+public class PermissionEntityLimitIncreaseCommand extends PermissionEntityLimitCommand {
 
 	@Argument
 	protected Limit limit;

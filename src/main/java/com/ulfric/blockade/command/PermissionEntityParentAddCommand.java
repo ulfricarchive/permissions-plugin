@@ -8,18 +8,17 @@ import com.ulfric.embargo.entity.Entity;
 import com.ulfric.i18n.content.Details;
 import com.ulfric.servix.services.locale.TellService;
 
-@Name("test")
-@Permission("blockade.use.entity.parent.test")
-public class BlockadeEntityParentTestCommand extends BlockadeEntityParentCommand {
+@Name("add")
+@Permission("permission.use.entity.parent.add")
+public class PermissionEntityParentAddCommand extends PermissionEntityParentCommand {
 
 	@Argument
 	protected Entity parent;
 
 	@Override
 	public void run(Context context) {
-		Details details = details();
-		details.add("test", Boolean.toString(entity.hasParent(parent)));
-		TellService.sendMessage(context.getSender(), "blockade-parent-test", details);
+		entity.addParent(parent);
+		TellService.sendMessage(context.getSender(), "blockade-parent-add", details());
 	}
 
 	@Override

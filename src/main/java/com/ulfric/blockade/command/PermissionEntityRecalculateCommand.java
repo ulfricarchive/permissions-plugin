@@ -8,8 +8,8 @@ import com.ulfric.servix.services.locale.TellService;
 
 @Name("recalculate")
 @Alias("recalc")
-@Permission("blockade.use.entity.recalculate")
-public class BlockadeEntityRecalculateCommand extends BlockadeEntityCommand {
+@Permission("permission.use.entity.recalculate")
+public class PermissionEntityRecalculateCommand extends PermissionEntityCommand {
 
 	@Override
 	public void run(Context context) {

@@ -8,17 +8,20 @@ import com.ulfric.embargo.limit.Limit;
 import com.ulfric.i18n.content.Details;
 import com.ulfric.servix.services.locale.TellService;
 
-@Name("set")
-@Permission("blockade.use.entity.limit.set")
-public class BlockadeEntityLimitSetCommand extends BlockadeEntityLimitCommand {
+@Name("decrease")
+@Permission("permission.use.entity.limit.decrease")
+public class PermissionEntityLimitDecreaseCommand extends PermissionEntityLimitCommand {
 
 	@Argument
 	protected Limit limit;
 
 	@Override
 	public void run(Context context) {
-		entity.setLimit(node, limit);
-		TellService.sendMessage(context.getSender(), "blockade-limit-set", details());
+		Limit newLimit = entity.getLimit(node).without(limit);
+		entity.setLimit(node, newLimit);
+		Details details = details();
+		details.add("newLimit", newLimit.toString());
+		TellService.sendMessage(context.getSender(), "blockade-limit-decrease", details);
 	}
 
 	@Override

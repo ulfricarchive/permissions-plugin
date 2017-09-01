@@ -6,10 +6,10 @@ import com.ulfric.andrew.Context;
 import com.ulfric.andrew.Permission;
 import com.ulfric.commons.naming.Name;
 
-@Name("blockade")
-@Alias({"embargo", "permission", "perm"})
-@Permission("blockade.use")
-public class BlockadeCommand implements Command {
+@Name("permission")
+@Alias("perm")
+@Permission("permission.use")
+public class PermissionCommand implements Command {
 
 	@Override
 	public void run(Context context) {

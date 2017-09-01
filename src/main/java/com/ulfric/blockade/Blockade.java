@@ -1,5 +1,7 @@
 package com.ulfric.blockade;
 
+import com.ulfric.blockade.command.EntityResolver;
+import com.ulfric.blockade.command.LimitResolver;
 import com.ulfric.blockade.command.PermissionCommand;
 import com.ulfric.blockade.command.PermissionEntityCommand;
 import com.ulfric.blockade.command.PermissionEntityLimitClearCommand;
@@ -17,8 +19,6 @@ import com.ulfric.blockade.command.PermissionEntityParentRemoveCommand;
 import com.ulfric.blockade.command.PermissionEntityParentResetCommand;
 import com.ulfric.blockade.command.PermissionEntityParentTestCommand;
 import com.ulfric.blockade.command.PermissionEntityRecalculateCommand;
-import com.ulfric.blockade.command.EntityResolver;
-import com.ulfric.blockade.command.LimitResolver;
 import com.ulfric.blockade.entity.PersistentGroup;
 import com.ulfric.blockade.entity.PersistentPermissions;
 import com.ulfric.blockade.entity.PersistentUser;

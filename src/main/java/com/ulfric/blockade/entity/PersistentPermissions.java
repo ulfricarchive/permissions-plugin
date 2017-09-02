@@ -44,7 +44,7 @@ public class PersistentPermissions implements PermissionsService { // TODO threa
 			return user;
 		}
 
-		PersistentUser persistentUser = new PersistentUser(users.getData(uniqueId.toString()), name, uniqueId);
+		PersistentUser persistentUser = new PersistentUser(users.getData(uniqueId), name, uniqueId);
 		loadedUsers.add(persistentUser);
 		return persistentUser;
 	}

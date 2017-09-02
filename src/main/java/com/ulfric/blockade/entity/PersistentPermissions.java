@@ -1,5 +1,8 @@
 package com.ulfric.blockade.entity;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+
 import com.ulfric.data.database.Database;
 import com.ulfric.data.database.Store;
 import com.ulfric.embargo.entity.Group;
@@ -37,6 +40,17 @@ public class PersistentPermissions implements PermissionsService { // TODO threa
 	}
 
 	@Override
+	public User createUser(UUID uniqueId) {
+		User user = getUserByUniqueId(uniqueId);
+		if (user != null) {
+			return user;
+		}
+
+		OfflinePlayer player = Bukkit.getOfflinePlayer(uniqueId);
+		return createUserSkipLookup(uniqueId, player == null ? "unknown" : player.getName());
+	}
+
+	@Override
 	public User createUser(UUID uniqueId, String name) {
 		User user = getUserByUniqueId(uniqueId);
 
@@ -44,6 +58,10 @@ public class PersistentPermissions implements PermissionsService { // TODO threa
 			return user;
 		}
 
+		return createUserSkipLookup(uniqueId, name);
+	}
+
+	private User createUserSkipLookup(UUID uniqueId, String name) {
 		PersistentUser persistentUser = new PersistentUser(users.getData(uniqueId), name, uniqueId);
 		loadedUsers.add(persistentUser);
 		return persistentUser;

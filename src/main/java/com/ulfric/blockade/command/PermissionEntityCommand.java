@@ -9,7 +9,7 @@ import com.ulfric.embargo.entity.Entity;
 import com.ulfric.i18n.content.Details;
 
 @Name("entity")
-@Alias("ent")
+@Alias({"ent", "group", "user"})
 @Permission("permission.use.entity")
 public class PermissionEntityCommand extends PermissionCommand {
 

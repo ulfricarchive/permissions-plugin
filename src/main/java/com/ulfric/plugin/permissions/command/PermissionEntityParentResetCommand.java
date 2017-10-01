@@ -1,11 +1,11 @@
-package com.ulfric.blockade.command;
+package com.ulfric.plugin.permissions.command;
 
-import com.ulfric.andrew.Context;
-import com.ulfric.andrew.Permission;
 import com.ulfric.commons.naming.Name;
-import com.ulfric.embargo.entity.Entity;
+import com.ulfric.commons.permissions.entity.Entity;
 import com.ulfric.i18n.content.Details;
-import com.ulfric.servix.services.locale.TellService;
+import com.ulfric.plugin.commands.Context;
+import com.ulfric.plugin.commands.Permission;
+import com.ulfric.plugin.locale.TellService;
 
 import java.util.List;
 

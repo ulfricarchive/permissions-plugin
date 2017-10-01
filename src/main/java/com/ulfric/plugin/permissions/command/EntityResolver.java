@@ -1,12 +1,12 @@
-package com.ulfric.blockade.command;
+package com.ulfric.plugin.permissions.command;
 
-import com.ulfric.andrew.Command;
-import com.ulfric.andrew.argument.ResolutionRequest;
-import com.ulfric.andrew.argument.Resolver;
+import com.ulfric.commons.permissions.entity.Entity;
 import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.dragoon.extension.inject.Inject;
-import com.ulfric.embargo.entity.Entity;
-import com.ulfric.servix.services.permissions.PermissionsService;
+import com.ulfric.plugin.commands.Command;
+import com.ulfric.plugin.commands.argument.ResolutionRequest;
+import com.ulfric.plugin.commands.argument.Resolver;
+import com.ulfric.plugin.permissions.PermissionsService;
 
 import java.util.Map;
 import java.util.UUID;

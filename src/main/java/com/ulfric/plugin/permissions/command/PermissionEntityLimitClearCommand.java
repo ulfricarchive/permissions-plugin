@@ -1,10 +1,10 @@
-package com.ulfric.blockade.command;
+package com.ulfric.plugin.permissions.command;
 
-import com.ulfric.andrew.Context;
-import com.ulfric.andrew.Permission;
 import com.ulfric.commons.naming.Name;
-import com.ulfric.embargo.limit.StandardLimits;
-import com.ulfric.servix.services.locale.TellService;
+import com.ulfric.commons.permissions.limit.StandardLimits;
+import com.ulfric.plugin.commands.Context;
+import com.ulfric.plugin.commands.Permission;
+import com.ulfric.plugin.locale.TellService;
 
 @Name("clear")
 @Permission("permission.use.entity.limit.clear")

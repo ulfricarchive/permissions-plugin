@@ -1,4 +1,4 @@
-package com.ulfric.blockade;
+package com.ulfric.plugin.permissions;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -6,24 +6,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 
+import com.ulfric.commons.permissions.entity.User;
 import com.ulfric.commons.reflect.FieldHelper;
-import com.ulfric.data.database.Database;
-import com.ulfric.data.database.Store;
 import com.ulfric.dragoon.reflect.Handles;
-import com.ulfric.embargo.entity.User;
-import com.ulfric.servix.services.permissions.PermissionsService;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Field;
 import java.util.Optional;
 import java.util.UUID;
 
-public class BlockadeListener implements Listener {
+public class PermissionsListener implements Listener {
 
 	private static MethodHandle setPermissibleBase;
-
-	@Database // TODO stereotype for common permissions database annotation
-	private Store users;
 
 	@EventHandler
 	public void on(AsyncPlayerPreLoginEvent event) {

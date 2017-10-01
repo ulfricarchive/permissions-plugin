@@ -1,28 +1,31 @@
-package com.ulfric.blockade.entity;
+package com.ulfric.plugin.permissions.entity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
-import com.ulfric.data.database.Database;
-import com.ulfric.data.database.Store;
-import com.ulfric.embargo.entity.Group;
-import com.ulfric.embargo.entity.User;
-import com.ulfric.servix.services.permissions.PermissionsService;
+import com.ulfric.commons.permissions.entity.Group;
+import com.ulfric.commons.permissions.entity.User;
+import com.ulfric.dragoon.rethink.Database;
+import com.ulfric.dragoon.rethink.Instance;
+import com.ulfric.dragoon.rethink.Location;
+import com.ulfric.dragoon.rethink.Store;
+import com.ulfric.plugin.permissions.PermissionsService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class PersistentPermissions implements PermissionsService { // TODO thread safety
 
 	private final List<PersistentUser> loadedUsers = new ArrayList<>();
 	private final List<PersistentGroup> loadedGroups = new ArrayList<>();
 
-	@Database
-	private Store groups;
+	@Database(value = "permissions", table = "groups")
+	private Store<PermissionEntityDocument> groups;
 
-	@Database
-	private Store users;
+	@Database(value = "permissions", table = "users")
+	private Store<PermissionEntityDocument> users;
 
 	@Override
 	public Class<PermissionsService> getService() {
@@ -62,7 +65,13 @@ public class PersistentPermissions implements PermissionsService { // TODO threa
 	}
 
 	private User createUserSkipLookup(UUID uniqueId, String name) {
-		PersistentUser persistentUser = new PersistentUser(users.getData(uniqueId), name, uniqueId);
+		Instance<PermissionEntityDocument> instance = getDocument(uniqueId, users);
+
+		EntityPersistence persistence = new EntityPersistence(users, instance);
+		PersistentUser persistentUser = new PersistentUser(persistence, name, uniqueId);
+
+		instance.addListener(ignore -> persistentUser.reload());
+
 		loadedUsers.add(persistentUser);
 		return persistentUser;
 	}
@@ -80,9 +89,22 @@ public class PersistentPermissions implements PermissionsService { // TODO threa
 			return group;
 		}
 
-		PersistentGroup persistentGroup = new PersistentGroup(groups.getData(name), name);
+		Instance<PermissionEntityDocument> instance = getDocument(name, users);
+		EntityPersistence persistence = new EntityPersistence(groups, instance);
+		PersistentGroup persistentGroup = new PersistentGroup(persistence, name);
+
+		instance.addListener(ignore -> persistentGroup.reload());
+
 		loadedGroups.add(persistentGroup);
 		return persistentGroup;
+	}
+
+	private Instance<PermissionEntityDocument> getDocument(Object key, Store<PermissionEntityDocument> store) {
+		try {
+			return store.get(Location.key(key)).get(); // TODO timeout
+		} catch (InterruptedException | ExecutionException exception) {
+			return null;
+		}
 	}
 
 	@Override

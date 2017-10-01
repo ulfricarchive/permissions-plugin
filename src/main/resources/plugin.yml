@@ -1,6 +1,6 @@
-name: Blockade
-main: com.ulfric.blockade.Blockade
+name: Permissions
+main: com.ulfric.plugin.Permissions
 version: 1.0.0
-author: Ulfric Projects
+author: Ulfric LLC
 load: STARTUP
 depend: [Platform]

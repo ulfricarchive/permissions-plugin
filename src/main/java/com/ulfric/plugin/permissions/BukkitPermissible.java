@@ -1,4 +1,4 @@
-package com.ulfric.blockade;
+package com.ulfric.plugin.permissions;
 
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
@@ -7,16 +7,16 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.ServerOperator;
 import org.bukkit.plugin.Plugin;
 
-import com.ulfric.embargo.node.Allowance;
+import com.ulfric.commons.permissions.node.Allowance;
 
 import java.util.Objects;
 import java.util.Set;
 
 final class BukkitPermissible extends PermissibleBase {
 
-	private final com.ulfric.embargo.entity.Entity entity;
+	private final com.ulfric.commons.permissions.entity.Entity entity;
 
-	public BukkitPermissible(ServerOperator opable, com.ulfric.embargo.entity.Entity entity) {
+	public BukkitPermissible(ServerOperator opable, com.ulfric.commons.permissions.entity.Entity entity) {
 		super(opable);
 		Objects.requireNonNull(opable, "opable");
 		Objects.requireNonNull(entity, "entity");

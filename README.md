@@ -1,2 +1,2 @@
-# blockade
-Minecraft implementation of the Embargo access control framework
+# permissions-plugin
+Minecraft implementation of the commons-permissions access control framework

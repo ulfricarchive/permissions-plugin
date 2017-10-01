@@ -1,12 +1,12 @@
-package com.ulfric.blockade.command;
+package com.ulfric.plugin.permissions.command;
 
-import com.ulfric.andrew.Alias;
-import com.ulfric.andrew.Context;
-import com.ulfric.andrew.Permission;
-import com.ulfric.andrew.argument.Argument;
 import com.ulfric.commons.naming.Name;
-import com.ulfric.embargo.entity.Entity;
+import com.ulfric.commons.permissions.entity.Entity;
 import com.ulfric.i18n.content.Details;
+import com.ulfric.plugin.commands.Alias;
+import com.ulfric.plugin.commands.Context;
+import com.ulfric.plugin.commands.Permission;
+import com.ulfric.plugin.commands.argument.Argument;
 
 @Name("entity")
 @Alias({"ent", "group", "user"})

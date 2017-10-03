@@ -1,6 +1,5 @@
 name: Permissions
-main: com.ulfric.plugin.Permissions
+main: com.ulfric.plugin.permissions.PermissionsPlugin
 version: 1.0.0
 author: Ulfric LLC
-load: STARTUP
-depend: [Platform]
+depend: [Platform, Services, Data, Locale, Commands]

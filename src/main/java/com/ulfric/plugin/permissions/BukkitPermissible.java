@@ -53,7 +53,6 @@ final class BukkitPermissible extends PermissibleBase {
 		entity.recalculate();
 	}
 
-	@SuppressWarnings("sync-override")
 	@Override
 	public void clearPermissions() {
 		// TODO delete cached user

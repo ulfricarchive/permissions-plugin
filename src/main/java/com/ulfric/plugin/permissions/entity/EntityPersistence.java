@@ -13,8 +13,8 @@ import com.ulfric.commons.permissions.limit.Limit;
 import com.ulfric.commons.permissions.limit.StandardLimits;
 import com.ulfric.commons.permissions.node.Allowance;
 import com.ulfric.dragoon.rethink.Instance;
-import com.ulfric.dragoon.rethink.Response;
 import com.ulfric.dragoon.rethink.Store;
+import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.plugin.permissions.PermissionsService;
 
 import java.util.Collections;

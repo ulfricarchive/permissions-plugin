@@ -20,15 +20,11 @@ import com.ulfric.plugin.permissions.command.PermissionEntityParentRemoveCommand
 import com.ulfric.plugin.permissions.command.PermissionEntityParentResetCommand;
 import com.ulfric.plugin.permissions.command.PermissionEntityParentTestCommand;
 import com.ulfric.plugin.permissions.command.PermissionEntityRecalculateCommand;
-import com.ulfric.plugin.permissions.entity.PersistentGroup;
-import com.ulfric.plugin.permissions.entity.PersistentPermissions;
-import com.ulfric.plugin.permissions.entity.PersistentUser;
+import com.ulfric.plugin.permissions.persistence.PersistentPermissions;
 
 public class PermissionsPlugin extends Plugin {
 
 	public PermissionsPlugin() {
-		addShutdownHook(this::saveEntities);
-
 		install(PersistentPermissions.class);
 		install(PermissionsListener.class);
 
@@ -52,19 +48,6 @@ public class PermissionsPlugin extends Plugin {
 		install(PermissionEntityParentRemoveCommand.class);
 		install(PermissionEntityParentResetCommand.class);
 		install(PermissionEntityParentTestCommand.class);
-	}
-
-	private void saveEntities() { // TODO log sizes
-		PermissionsService service = PermissionsService.get();
-		if (service == null) {
-			throw new IllegalStateException("Could not find PermissionsService");
-		}
-
-		service.getActiveGroups().stream().filter(PersistentGroup.class::isInstance).map(PersistentGroup.class::cast)
-		        .forEach(PersistentGroup::write);
-
-		service.getActiveUsers().stream().filter(PersistentUser.class::isInstance).map(PersistentUser.class::cast)
-		        .forEach(PersistentUser::write);
 	}
 
 }

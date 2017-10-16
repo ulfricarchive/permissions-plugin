@@ -6,7 +6,6 @@ import com.ulfric.i18n.content.Details;
 import com.ulfric.plugin.commands.Context;
 import com.ulfric.plugin.commands.Permission;
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.locale.TellService;
 
 @Name("set")
 @Permission("permission.use.entity.limit.set")
@@ -18,7 +17,7 @@ public class PermissionEntityLimitSetCommand extends PermissionEntityLimitComman
 	@Override
 	public void run(Context context) {
 		entity.setLimit(node, limit);
-		TellService.sendMessage(context.getSender(), "blockade-limit-set", details());
+		persist(context);
 	}
 
 	@Override

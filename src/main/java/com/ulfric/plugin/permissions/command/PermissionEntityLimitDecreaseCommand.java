@@ -6,7 +6,6 @@ import com.ulfric.i18n.content.Details;
 import com.ulfric.plugin.commands.Context;
 import com.ulfric.plugin.commands.Permission;
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.locale.TellService;
 
 @Name("decrease")
 @Permission("permission.use.entity.limit.decrease")
@@ -20,14 +19,14 @@ public class PermissionEntityLimitDecreaseCommand extends PermissionEntityLimitC
 		Limit newLimit = entity.getLimit(node).without(limit);
 		entity.setLimit(node, newLimit);
 		Details details = details();
-		details.add("newLimit", newLimit.toString());
-		TellService.sendMessage(context.getSender(), "blockade-limit-decrease", details);
+		details.add("newLimit", newLimit);
+		persist(context);
 	}
 
 	@Override
 	protected Details details() {
 		Details details = super.details();
-		details.add("limit", limit.toString());
+		details.add("limit", limit);
 		return details;
 	}
 

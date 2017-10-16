@@ -1,11 +1,10 @@
 package com.ulfric.plugin.permissions;
 
-import com.ulfric.commons.permissions.entity.Group;
-import com.ulfric.commons.permissions.entity.User;
-import com.ulfric.plugin.services.Service;
-
-import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+
+import com.ulfric.dragoon.rethink.response.Response;
+import com.ulfric.plugin.services.Service;
 
 public interface PermissionsService extends Service<PermissionsService> {
 
@@ -13,20 +12,12 @@ public interface PermissionsService extends Service<PermissionsService> {
 		return Service.get(PermissionsService.class);
 	}
 
-	List<User> getActiveUsers();
+	CompletableFuture<User> getUserByUniqueId(UUID uniqueId);
 
-	User getUserByName(String name);
+	CompletableFuture<Group> getGroupByName(String name);
 
-	User getUserByUniqueId(UUID uniqueId);
+	CompletableFuture<Response> persistUser(User user);
 
-	User createUser(UUID uniqueId);
-
-	User createUser(UUID uniqueId, String name);
-
-	Group getGroupByName(String name);
-
-	Group createGroupByName(String name);
-
-	List<Group> getActiveGroups();
+	CompletableFuture<Response> persistGroup(Group user);
 
 }

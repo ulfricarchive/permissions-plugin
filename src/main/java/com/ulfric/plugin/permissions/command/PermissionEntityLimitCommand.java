@@ -18,7 +18,7 @@ public class PermissionEntityLimitCommand extends PermissionEntityCommand {
 	public void run(Context context) {
 		Details details = details();
 		details.add("test", entity.getLimit(node).toString());
-		TellService.sendMessage(context.getSender(), "blockade-limit-test", details);
+		TellService.sendMessage(context.getSender(), "permissions-limit-test", details);
 	}
 
 	@Override

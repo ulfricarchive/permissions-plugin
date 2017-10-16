@@ -18,7 +18,7 @@ public class PermissionEntityNodeCommand extends PermissionEntityCommand {
 	public void run(Context context) {
 		Details details = details();
 		details.add("test", entity.testPermission(node).name().toLowerCase());
-		TellService.sendMessage(context.getSender(), "blockade-node-test", details);
+		TellService.sendMessage(context.getSender(), "permissions-node-test", details);
 	}
 
 	@Override

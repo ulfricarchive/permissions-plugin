@@ -14,7 +14,7 @@ public class PermissionEntityRecalculateCommand extends PermissionEntityCommand 
 	@Override
 	public void run(Context context) {
 		entity.recalculate();
-		TellService.sendMessage(context.getSender(), "blockade-recalculate", details());
+		TellService.sendMessage(context.getSender(), "permissions-recalculate", details());
 	}
 
 }

@@ -19,14 +19,13 @@ public class PermissionEntityParentTestCommand extends PermissionEntityParentCom
 	public void run(Context context) {
 		Details details = details();
 		details.add("test", Boolean.toString(entity.hasParent(parent)));
-		TellService.sendMessage(context.getSender(), "blockade-parent-test", details);
+		TellService.sendMessage(context.getSender(), "permissions-parent-test", details);
 	}
 
 	@Override
 	protected Details details() {
 		Details details = super.details();
-		details.add("parentName", parent.getName());
-		details.add("parentUuid", parent.getUniqueId().toString());
+		details.add("parent", parent);
 		return details;
 	}
 

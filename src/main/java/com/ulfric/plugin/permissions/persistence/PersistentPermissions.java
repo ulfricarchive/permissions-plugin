@@ -14,6 +14,7 @@ import com.ulfric.commons.permissions.limit.IntegerLimit;
 import com.ulfric.commons.permissions.limit.StandardLimits;
 import com.ulfric.commons.permissions.node.Allowance;
 import com.ulfric.dragoon.extension.inject.Inject;
+import com.ulfric.dragoon.rethink.Instance;
 import com.ulfric.dragoon.rethink.Location;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.plugin.entities.Entity;
@@ -53,10 +54,14 @@ public class PersistentPermissions implements PermissionsService {
 		}
 
 		User user = new User(uniqueId);
+		userCache.put(uniqueId, user);
 		return users.createEntity(uniqueId)
 			.thenApply(instance -> {
-				loadEntity(instance.get(), user);
-				instance.addListener(newDocument -> loadEntity(newDocument, user));
+				Entity document = instance.get();
+				if (document != null) {
+					loadEntity(document, user);
+				}
+				addListener(instance, user);
 				return user;
 			});
 	}
@@ -69,12 +74,20 @@ public class PersistentPermissions implements PermissionsService {
 		}
 
 		Group group = new Group(name);
+		groupCache.put(name, group);
 		return groups.createEntity(name)
 			.thenApply(instance -> {
-				loadEntity(instance.get(), group);
-				instance.addListener(newDocument -> loadEntity(newDocument, group));
+				Entity document = instance.get();
+				if (document != null) {
+					loadEntity(document, group);
+				}
+				addListener(instance, group);
 				return group;
 			});
+	}
+
+	private void addListener(Instance<Entity> instance, com.ulfric.commons.permissions.entity.Entity permissible) {
+		instance.addListener(newDocument -> loadEntity(newDocument, permissible));
 	}
 
 	private void loadEntity(Entity document, com.ulfric.commons.permissions.entity.Entity permissible) {

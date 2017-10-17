@@ -13,9 +13,4 @@ enum PermissionsComponentKey implements ComponentKey<PermissionsComponent> {
 		return PermissionsComponent.class;
 	}
 
-	@Override
-	public String toString() {
-		return getName();
-	}
-
 }

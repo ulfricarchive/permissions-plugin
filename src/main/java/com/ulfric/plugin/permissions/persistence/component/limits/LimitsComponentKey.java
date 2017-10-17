@@ -13,9 +13,4 @@ enum LimitsComponentKey implements ComponentKey<LimitsComponent> {
 		return LimitsComponent.class;
 	}
 
-	@Override
-	public String toString() {
-		return getName();
-	}
-
 }

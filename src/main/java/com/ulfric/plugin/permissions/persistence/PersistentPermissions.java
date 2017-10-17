@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ulfric.commons.permissions.limit.IntegerLimit;
@@ -18,6 +20,7 @@ import com.ulfric.dragoon.rethink.Instance;
 import com.ulfric.dragoon.rethink.Location;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.plugin.entities.Entity;
+import com.ulfric.plugin.entities.components.ComponentKeys;
 import com.ulfric.plugin.entities.components.name.NameComponent;
 import com.ulfric.plugin.permissions.Group;
 import com.ulfric.plugin.permissions.PermissionsService;
@@ -31,6 +34,12 @@ import com.ulfric.plugin.permissions.persistence.groups.GroupSystem;
 import com.ulfric.plugin.permissions.persistence.users.UserSystem;
 
 public class PersistentPermissions implements PermissionsService {
+
+	static {
+		ComponentKeys.register(LimitsComponent.KEY);
+		ComponentKeys.register(PermissionsComponent.KEY);
+		ComponentKeys.register(ParentsComponent.KEY);
+	}
 
 	private final Map<UUID, User> userCache = new HashMap<>();
 	private final Map<String, Group> groupCache = new HashMap<>();
@@ -132,14 +141,23 @@ public class PersistentPermissions implements PermissionsService {
 
 		String identifier = entity.getIdentifier();
 		if (StringUtils.isNotEmpty(identifier)) {
-			document.setLocation(Location.key(entity));
+			document.setLocation(Location.key(identifier));
 
 			NameComponent name = new NameComponent();
 			name.setName(identifier);
 			document.addComponent(name);
 		}
 
+		getPermissionsComponent(entity).ifPresent(document::addComponent);
+		getLimitsComponent(entity).ifPresent(document::addComponent);
+		getParentsComponent(entity).ifPresent(document::addComponent);
+
+		return document;
+	}
+
+	private Optional<PermissionsComponent> getPermissionsComponent(com.ulfric.commons.permissions.entity.Entity entity) {
 		PermissionsComponent permissionsDocument = new PermissionsComponent();
+
 		entity.getPermissions().forEach((node, allowance) -> {
 			if (allowance == Allowance.UNDEFINED) {
 				return;
@@ -150,9 +168,17 @@ public class PersistentPermissions implements PermissionsService {
 			permission.setAllowed(allowance != Allowance.DENIED);
 			permissionsDocument.addPermission(permission);
 		});
-		document.addComponent(permissionsDocument);
 
+		if (CollectionUtils.isEmpty(permissionsDocument.getPermissions())) {
+			return Optional.empty();
+		}
+
+		return Optional.of(permissionsDocument);
+	}
+
+	private Optional<LimitsComponent> getLimitsComponent(com.ulfric.commons.permissions.entity.Entity entity) {
 		LimitsComponent limitsDocument = new LimitsComponent();
+
 		entity.getLimits().forEach((node, limit) -> {
 			Limit limitBean = new Limit();
 			limitBean.setNode(node);
@@ -167,19 +193,29 @@ public class PersistentPermissions implements PermissionsService {
 
 			limitsDocument.addLimit(limitBean);
 		});
-		document.addComponent(limitsDocument);
+
+		if (CollectionUtils.isEmpty(limitsDocument.getLimits())) {
+			return Optional.empty();
+		}
+
+		return Optional.of(limitsDocument);
+	}
+
+	private Optional<ParentsComponent> getParentsComponent(com.ulfric.commons.permissions.entity.Entity entity) {
+		List<String> parents = entity.getParents()
+				.stream()
+				.filter(Objects::nonNull)
+				.map(com.ulfric.commons.permissions.entity.Entity::getIdentifier)
+				.filter(Objects::nonNull)
+				.collect(Collectors.toList());
+
+		if (parents.isEmpty()) {
+			return Optional.empty();
+		}
 
 		ParentsComponent parentsDocument = new ParentsComponent();
-		List<String> parents = entity.getParents()
-			.stream()
-			.filter(Objects::nonNull)
-			.map(com.ulfric.commons.permissions.entity.Entity::getIdentifier)
-			.filter(Objects::nonNull)
-			.collect(Collectors.toList());
 		parentsDocument.setParents(parents);
-		document.addComponent(parentsDocument);
-
-		return document;
+		return Optional.of(parentsDocument);
 	}
 
 }

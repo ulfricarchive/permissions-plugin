@@ -13,9 +13,4 @@ enum ParentsComponentKey implements ComponentKey<ParentsComponent> {
 		return ParentsComponent.class;
 	}
 
-	@Override
-	public String toString() {
-		return getName();
-	}
-
 }

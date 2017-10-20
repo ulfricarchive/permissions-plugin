@@ -2,10 +2,8 @@ package com.ulfric.plugin.permissions.command;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.i18n.content.Details;
-import com.ulfric.plugin.commands.Context;
 import com.ulfric.plugin.commands.Permission;
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.locale.TellService;
 
 @Name("node")
 @Permission("permission.use.entity.node")
@@ -15,17 +13,10 @@ public class PermissionEntityNodeCommand extends PermissionEntityCommand {
 	protected String node;
 
 	@Override
-	public void run(Context context) {
+	public void run() {
 		Details details = details();
 		details.add("test", entity.testPermission(node));
-		TellService.sendMessage(context.getSender(), "permissions-node-test", details);
-	}
-
-	@Override
-	protected Details details() {
-		Details details = super.details();
-		details.add("node", node);
-		return details;
+		tell("permissions-node-test", details);
 	}
 
 }

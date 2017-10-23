@@ -32,7 +32,7 @@ public class PermissionsListener implements Listener {
 		}
 
 		try {
-			PermissionsService.get().getUserByUniqueId(event.getUniqueId()).get(5, TimeUnit.SECONDS);
+			PermissionsService.get().getUserByUniqueId(event.getUniqueId()).get(10, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException exception) {
 			event.setLoginResult(Result.KICK_OTHER);
 
@@ -43,7 +43,7 @@ public class PermissionsListener implements Listener {
 	}
 
 	@EventHandler
-	public void on(PlayerLoginEvent event) throws Exception {
+	public void on(PlayerLoginEvent event) {
 		if (event.getResult() != PlayerLoginEvent.Result.ALLOWED) {
 			return;
 		}
@@ -71,7 +71,7 @@ public class PermissionsListener implements Listener {
 			} catch (Throwable exception) {
 				errorLoadingData(player, exception);
 			}
-		}).get();
+		}).join();
 	}
 
 	private void errorLoadingData(Player player, Throwable cause) {

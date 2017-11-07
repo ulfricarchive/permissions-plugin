@@ -65,7 +65,7 @@ public class PermissionsListener implements Listener {
 				return;
 			}
 
-			BukkitPermissible permissible = new BukkitPermissible(player, user);
+			BukkitPermissible permissible = new BukkitPermissible(user);
 			try {
 				setter.invokeExact((Object) player, (Object) permissible);
 			} catch (Throwable exception) {
@@ -84,14 +84,28 @@ public class PermissionsListener implements Listener {
 			return setPermissibleBase;
 		}
 
-		Optional<Field> permField = FieldHelper.getDeclaredField(player.getClass().getSuperclass(), "perm");
-		if (!permField.isPresent()) {
+		Field permField = findPermField(player.getClass());
+		if (permField == null) {
 			return null;
 		}
-		Field field = permField.get();
-		setPermissibleBase = Handles.setter(field);
+		setPermissibleBase = Handles.setter(permField);
 
 		return setPermissibleBase;
+	}
+
+	private Field findPermField(Class<?> holder) {
+		Optional<Field> permField = FieldHelper.getDeclaredField(holder, "perm");
+
+		if (permField.isPresent()) {
+			return permField.get();
+		}
+
+		holder = holder.getSuperclass();
+		if (holder == Object.class) {
+			return null;
+		}
+
+		return findPermField(holder);
 	}
 
 }

@@ -28,10 +28,14 @@ public class EntityResolver extends Resolver<Entity> {
 	public Entity apply(ResolutionRequest resolution) {
 		Map<Class<? extends Command>, String> labels = resolution.getContext().getLabels().getLabels();
 		if (labels != null) {
-			if (labels.containsValue("group")) {
-				return lookupGroup(resolution);
-			} else if (labels.containsValue("user")) {
-				return lookupUser(resolution);
+			String type = labels.get(PermissionEntityCommand.class);
+			if (type != null) {
+				type = type.toLowerCase();
+				if (type.equals("group")) {
+					return lookupGroup(resolution);
+				} else if (type.equals("user")) {
+					return lookupUser(resolution);
+				}
 			}
 		}
 

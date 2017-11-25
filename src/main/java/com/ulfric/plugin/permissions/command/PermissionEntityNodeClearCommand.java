@@ -12,7 +12,7 @@ public class PermissionEntityNodeClearCommand extends PermissionEntityNodeComman
 	@Override
 	public void run() {
 		entity.clearPermission(node);
-		persist(context);
+		persist();
 	}
 
 }

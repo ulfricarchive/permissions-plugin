@@ -13,7 +13,7 @@ public class PermissionEntityNodeGrantCommand extends PermissionEntityNodeComman
 	@Override
 	public void run() {
 		entity.setPermission(node, Allowance.ALLOWED);
-		persist(context);
+		persist();
 	}
 
 }

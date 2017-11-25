@@ -1,6 +1,6 @@
-package com.ulfric.plugin.permissions.persistence.component.permissions;
+package com.ulfric.plugin.permissions.persistence.permissions;
 
-import com.ulfric.plugin.permissions.persistence.component.Node;
+import com.ulfric.plugin.permissions.persistence.Node;
 
 public class Permission extends Node {
 

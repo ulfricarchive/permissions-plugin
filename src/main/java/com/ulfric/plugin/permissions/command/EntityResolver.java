@@ -3,9 +3,9 @@ package com.ulfric.plugin.permissions.command;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.curator.shaded.com.google.common.util.concurrent.Futures;
 import org.bukkit.OfflinePlayer;
 
+import com.google.common.util.concurrent.Futures;
 import com.ulfric.commons.bukkit.player.PlayerHelper;
 import com.ulfric.commons.permissions.entity.Entity;
 import com.ulfric.commons.value.UniqueIdHelper;

@@ -21,7 +21,7 @@ public class PermissionEntityLimitIncreaseCommand extends PermissionEntityLimitC
 		entity.setLimit(node, newLimit);
 		Details details = details();
 		details.add("newLimit", newLimit);
-		persist(context);
+		persist();
 	}
 
 }

@@ -17,7 +17,7 @@ public class PermissionEntityLimitSetCommand extends PermissionEntityLimitComman
 	@Override
 	public void run() {
 		entity.setLimit(node, limit);
-		persist(context);
+		persist();
 	}
 
 }

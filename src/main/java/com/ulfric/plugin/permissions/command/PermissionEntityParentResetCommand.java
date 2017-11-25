@@ -18,7 +18,7 @@ public class PermissionEntityParentResetCommand extends PermissionEntityParentCo
 	public void run() {
 		oldParents = entity.getParents();
 		oldParents.forEach(entity::removeParent);
-		persist(context);
+		persist();
 	}
 
 }

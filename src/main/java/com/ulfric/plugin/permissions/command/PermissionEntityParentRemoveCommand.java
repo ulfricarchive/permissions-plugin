@@ -17,7 +17,7 @@ public class PermissionEntityParentRemoveCommand extends PermissionEntityParentC
 	@Override
 	public void run() {
 		entity.removeParent(parent);
-		persist(context);
+		persist();
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.ulfric.plugin.permissions.persistence.component;
+package com.ulfric.plugin.permissions.persistence;
 
 import com.ulfric.commons.value.Bean;
 

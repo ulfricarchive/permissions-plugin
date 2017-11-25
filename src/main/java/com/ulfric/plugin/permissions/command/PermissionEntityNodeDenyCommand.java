@@ -13,7 +13,7 @@ public class PermissionEntityNodeDenyCommand extends PermissionEntityNodeCommand
 	@Override
 	public void run() {
 		entity.setPermission(node, Allowance.DENIED);
-		persist(context);
+		persist();
 	}
 
 }

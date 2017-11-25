@@ -1,48 +1,19 @@
-package com.ulfric.plugin.permissions.persistence.component.limits;
+package com.ulfric.plugin.permissions.persistence.limits;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 
 import com.ulfric.commons.permissions.limit.IntegerLimit;
 import com.ulfric.commons.permissions.limit.StandardLimits;
-import com.ulfric.plugin.entities.components.Component;
-import com.ulfric.plugin.entities.components.ComponentKey;
 
-public class LimitsComponent extends Component {
+public class LimitHelper {
 
-	public static final ComponentKey<LimitsComponent> KEY = LimitsComponentKey.INSTANCE;
-
-	private List<Limit> limits;
-
-	public List<Limit> getLimits() {
-		return limits;
-	}
-
-	public void setLimits(List<Limit> limits) {
-		this.limits = limits;
-	}
-
-	public void addLimit(Limit limit) {
-		Objects.requireNonNull(limit, "limit");
-
-		List<Limit> limits = getLimits();
-		if (limits == null) {
-			limits = new ArrayList<>();
-			setLimits(limits);
-		}
-
-		limits.add(limit);
-	}
-
-	public Map<String, com.ulfric.commons.permissions.limit.Limit> asPermissionLimits() {
-		List<Limit> limitBeans = getLimits();
+	public static Map<String, com.ulfric.commons.permissions.limit.Limit> asPermissionLimits(List<Limit> limitBeans) {
 		if (CollectionUtils.isEmpty(limitBeans)) {
 			return Collections.emptyMap();
 		}
@@ -58,7 +29,7 @@ public class LimitsComponent extends Component {
 		return limits;
 	}
 
-	private com.ulfric.commons.permissions.limit.Limit deserializeLimit(Limit limit) {
+	private static com.ulfric.commons.permissions.limit.Limit deserializeLimit(Limit limit) {
 		if (BooleanUtils.isTrue(limit.getUnlimited())) {
 			return StandardLimits.UNLIMITED;
 		} else if (BooleanUtils.isTrue(limit.getNone())) {
@@ -71,6 +42,9 @@ public class LimitsComponent extends Component {
 
 			return IntegerLimit.of(limitValue);
 		}
+	}
+
+	private LimitHelper() {
 	}
 
 }

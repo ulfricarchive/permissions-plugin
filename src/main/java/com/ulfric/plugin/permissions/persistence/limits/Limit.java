@@ -1,6 +1,6 @@
-package com.ulfric.plugin.permissions.persistence.component.limits;
+package com.ulfric.plugin.permissions.persistence.limits;
 
-import com.ulfric.plugin.permissions.persistence.component.Node;
+import com.ulfric.plugin.permissions.persistence.Node;
 
 public class Limit extends Node {
 

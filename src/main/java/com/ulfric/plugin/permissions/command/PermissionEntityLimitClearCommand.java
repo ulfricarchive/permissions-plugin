@@ -12,7 +12,7 @@ public class PermissionEntityLimitClearCommand extends PermissionEntityLimitComm
 	@Override
 	public void run() {
 		entity.clearLimit(node);
-		persist(context);
+		persist();
 	}
 
 }

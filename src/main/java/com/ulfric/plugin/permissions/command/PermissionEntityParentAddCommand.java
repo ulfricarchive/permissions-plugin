@@ -17,7 +17,7 @@ public class PermissionEntityParentAddCommand extends PermissionEntityParentComm
 	@Override
 	public void run() {
 		entity.addParent(parent);
-		persist(context);
+		persist();
 	}
 
 }

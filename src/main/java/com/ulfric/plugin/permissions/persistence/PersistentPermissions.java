@@ -1,54 +1,42 @@
 package com.ulfric.plugin.permissions.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-
+import com.ulfric.commons.permissions.entity.Entity;
 import com.ulfric.commons.permissions.limit.IntegerLimit;
 import com.ulfric.commons.permissions.limit.StandardLimits;
 import com.ulfric.commons.permissions.node.Allowance;
+import com.ulfric.dragoon.acrodb.Database;
+import com.ulfric.dragoon.acrodb.Store;
 import com.ulfric.dragoon.extension.inject.Inject;
-import com.ulfric.dragoon.rethink.Instance;
-import com.ulfric.dragoon.rethink.Location;
-import com.ulfric.dragoon.rethink.response.Response;
-import com.ulfric.plugin.entities.Entity;
-import com.ulfric.plugin.entities.components.ComponentKeys;
-import com.ulfric.plugin.entities.components.name.NameComponent;
 import com.ulfric.plugin.permissions.Group;
 import com.ulfric.plugin.permissions.PermissionsService;
 import com.ulfric.plugin.permissions.User;
-import com.ulfric.plugin.permissions.persistence.component.limits.Limit;
-import com.ulfric.plugin.permissions.persistence.component.limits.LimitsComponent;
-import com.ulfric.plugin.permissions.persistence.component.parents.ParentsComponent;
-import com.ulfric.plugin.permissions.persistence.component.permissions.Permission;
-import com.ulfric.plugin.permissions.persistence.component.permissions.PermissionsComponent;
-import com.ulfric.plugin.permissions.persistence.groups.GroupSystem;
-import com.ulfric.plugin.permissions.persistence.users.UserSystem;
+import com.ulfric.plugin.permissions.persistence.limits.Limit;
+import com.ulfric.plugin.permissions.persistence.limits.LimitHelper;
+import com.ulfric.plugin.permissions.persistence.parents.ParentHelper;
+import com.ulfric.plugin.permissions.persistence.permissions.Permission;
+import com.ulfric.plugin.permissions.persistence.permissions.PermissionHelper;
 
 public class PersistentPermissions implements PermissionsService {
-
-	static {
-		ComponentKeys.register(LimitsComponent.KEY);
-		ComponentKeys.register(PermissionsComponent.KEY);
-		ComponentKeys.register(ParentsComponent.KEY);
-	}
 
 	private final Map<UUID, User> userCache = new HashMap<>();
 	private final Map<String, Group> groupCache = new HashMap<>();
 
 	@Inject
-	private UserSystem users;
+	@Database({"permissions", "users"})
+	private Store<PermissionPersistenceEntity> users;
 
 	@Inject
-	private GroupSystem groups;
+	@Database({"permissions", "groups"})
+	private Store<PermissionPersistenceEntity> groups;
 
 	@Override
 	public Class<PermissionsService> getService() {
@@ -64,15 +52,12 @@ public class PersistentPermissions implements PermissionsService {
 
 		User user = new User(uniqueId);
 		userCache.put(uniqueId, user);
-		return users.createEntity(uniqueId)
-			.thenApply(instance -> {
-				Entity document = instance.get();
-				if (document != null) {
+
+		return users.getAsynchronous(uniqueId)
+				.thenApply(document -> {
 					loadEntity(document, user);
-				}
-				addListener(instance, user);
-				return user;
-			});
+					return user;
+				});
 	}
 
 	@Override
@@ -84,79 +69,60 @@ public class PersistentPermissions implements PermissionsService {
 
 		Group group = new Group(name);
 		groupCache.put(name, group);
-		return groups.createEntity(name)
-			.thenApply(instance -> {
-				Entity document = instance.get();
-				if (document != null) {
-					loadEntity(document, group);
-				}
-				addListener(instance, group);
+		return groups.getAsynchronous(name)
+			.thenApply(document -> {
+				loadEntity(document, group);
 				return group;
 			});
 	}
 
-	private void addListener(Instance<Entity> instance, com.ulfric.commons.permissions.entity.Entity permissible) {
-		instance.addListener(newDocument -> loadEntity(newDocument, permissible));
-	}
-
-	private void loadEntity(Entity document, com.ulfric.commons.permissions.entity.Entity permissible) {
+	private void loadEntity(PermissionPersistenceEntity document, Entity permissible) {
 		loadParents(document, permissible);
 		loadPermissions(document, permissible);
 		loadLimits(document, permissible);
 	}
 
-	private void loadParents(Entity document, com.ulfric.commons.permissions.entity.Entity permissible) {
-		ParentsComponent parentsDocument = document.getComponent(ParentsComponent.KEY);
-		if (parentsDocument != null) {
-			parentsDocument.parentsAsGroups(this).forEach(permissible::addParent);
-		}
+	private void loadParents(PermissionPersistenceEntity document, Entity permissible) {
+		List<String> parents = document.getParents();
+		ParentHelper.parentsAsGroups(this, parents)
+			.forEach(permissible::addParent);
 	}
 
-	private void loadPermissions(Entity document, com.ulfric.commons.permissions.entity.Entity permissible) {
-		PermissionsComponent permissionsDocument = document.getComponent(PermissionsComponent.KEY);
-		if (permissionsDocument != null) {
-			permissionsDocument.asAllowances().forEach(permissible::setPermission);
-		}
+	private void loadPermissions(PermissionPersistenceEntity document, Entity permissible) {
+		List<Permission> permissionBeans = document.getPermissions();
+		PermissionHelper.asAllowances(permissionBeans)
+			.forEach(permissible::setPermission);
 	}
 
-	private void loadLimits(Entity document, com.ulfric.commons.permissions.entity.Entity permissible) {
-		LimitsComponent limitsDocument = document.getComponent(LimitsComponent.KEY);
-		if (limitsDocument != null) {
-			limitsDocument.asPermissionLimits().forEach(permissible::setLimit);
-		}
+	private void loadLimits(PermissionPersistenceEntity document, Entity permissible) {
+		List<Limit> limitBeans = document.getLimits();
+		LimitHelper.asPermissionLimits(limitBeans)
+			.forEach(permissible::setLimit);
 	}
 
 	@Override
-	public CompletableFuture<Response> persistUser(User user) {
-		return users.persist(toDocument(user));
+	public CompletableFuture<Void> persistUser(User user) {
+		return users.persistAsynchronous(toDocument(user));
 	}
 
 	@Override
-	public CompletableFuture<Response> persistGroup(Group group) {
-		return users.persist(toDocument(group));
+	public CompletableFuture<Void> persistGroup(Group group) {
+		return groups.persistAsynchronous(toDocument(group));
 	}
 
-	private Entity toDocument(com.ulfric.commons.permissions.entity.Entity entity) { // TODO cleanup
-		Entity document = new Entity();
+	private PermissionPersistenceEntity toDocument(Entity entity) {
+		PermissionPersistenceEntity document = new PermissionPersistenceEntity();
 
-		String identifier = entity.getIdentifier();
-		if (StringUtils.isNotEmpty(identifier)) {
-			document.setLocation(Location.key(identifier));
-
-			NameComponent name = new NameComponent();
-			name.setName(identifier);
-			document.addComponent(name);
-		}
-
-		getPermissionsComponent(entity).ifPresent(document::addComponent);
-		getLimitsComponent(entity).ifPresent(document::addComponent);
-		getParentsComponent(entity).ifPresent(document::addComponent);
+		document.setIdentifier(entity.getIdentifier());
+		document.setPermissions(getPermissionBeans(entity));
+		document.setLimits(getLimitBeans(entity));
+		document.setParents(getParents(entity));
 
 		return document;
 	}
 
-	private Optional<PermissionsComponent> getPermissionsComponent(com.ulfric.commons.permissions.entity.Entity entity) {
-		PermissionsComponent permissionsDocument = new PermissionsComponent();
+	private List<Permission> getPermissionBeans(com.ulfric.commons.permissions.entity.Entity entity) {
+		List<Permission> permissionBeans = new ArrayList<>();
 
 		entity.getPermissions().forEach((node, allowance) -> {
 			if (allowance == Allowance.UNDEFINED) {
@@ -166,18 +132,14 @@ public class PersistentPermissions implements PermissionsService {
 			Permission permission = new Permission();
 			permission.setNode(node);
 			permission.setAllowed(allowance != Allowance.DENIED);
-			permissionsDocument.addPermission(permission);
+			permissionBeans.add(permission);
 		});
 
-		if (CollectionUtils.isEmpty(permissionsDocument.getPermissions())) {
-			return Optional.empty();
-		}
-
-		return Optional.of(permissionsDocument);
+		return permissionBeans.isEmpty() ? null : permissionBeans;
 	}
 
-	private Optional<LimitsComponent> getLimitsComponent(com.ulfric.commons.permissions.entity.Entity entity) {
-		LimitsComponent limitsDocument = new LimitsComponent();
+	private List<Limit> getLimitBeans(Entity entity) {
+		List<Limit> limits = new ArrayList<>();
 
 		entity.getLimits().forEach((node, limit) -> {
 			Limit limitBean = new Limit();
@@ -191,31 +153,22 @@ public class PersistentPermissions implements PermissionsService {
 				limitBean.setValue(((IntegerLimit) limit).intValue());
 			}
 
-			limitsDocument.addLimit(limitBean);
+			limits.add(limitBean);
 		});
 
-		if (CollectionUtils.isEmpty(limitsDocument.getLimits())) {
-			return Optional.empty();
-		}
-
-		return Optional.of(limitsDocument);
+		return limits.isEmpty() ? null : limits;
 	}
 
-	private Optional<ParentsComponent> getParentsComponent(com.ulfric.commons.permissions.entity.Entity entity) {
+	private List<String> getParents(Entity entity) {
 		List<String> parents = entity.getParents()
 				.stream()
 				.filter(Objects::nonNull)
-				.map(com.ulfric.commons.permissions.entity.Entity::getIdentifier)
+				.map(Entity::getIdentifier)
 				.filter(Objects::nonNull)
+				.distinct()
 				.collect(Collectors.toList());
 
-		if (parents.isEmpty()) {
-			return Optional.empty();
-		}
-
-		ParentsComponent parentsDocument = new ParentsComponent();
-		parentsDocument.setParents(parents);
-		return Optional.of(parentsDocument);
+		return parents.isEmpty() ? null : parents;
 	}
 
 }

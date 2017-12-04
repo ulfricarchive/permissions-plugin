@@ -2,8 +2,8 @@ package com.ulfric.plugin.permissions.command;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.i18n.content.Details;
-import com.ulfric.plugin.commands.Permission;
 import com.ulfric.plugin.commands.argument.Argument;
+import com.ulfric.plugin.commands.permissions.Permission;
 
 @Name("node")
 @Permission("permission.use.entity.node")

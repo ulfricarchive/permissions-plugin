@@ -11,6 +11,7 @@ import com.ulfric.commons.permissions.entity.Entity;
 import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.plugin.commands.Command;
+import com.ulfric.plugin.commands.argument.EnteredSyntax;
 import com.ulfric.plugin.commands.argument.ResolutionRequest;
 import com.ulfric.plugin.commands.argument.Resolver;
 import com.ulfric.plugin.permissions.PermissionsService;
@@ -26,15 +27,18 @@ public class EntityResolver extends Resolver<Entity> {
 
 	@Override
 	public Entity apply(ResolutionRequest resolution) {
-		Map<Class<? extends Command>, String> labels = resolution.getContext().getLabels().getLabels();
+		Map<Class<? extends Command>, EnteredSyntax> labels = resolution.getContext().getArguments().getArguments();
 		if (labels != null) {
-			String type = labels.get(PermissionEntityCommand.class);
-			if (type != null) {
-				type = type.toLowerCase();
-				if (type.equals("group")) {
-					return lookupGroup(resolution);
-				} else if (type.equals("user")) {
-					return lookupUser(resolution);
+			EnteredSyntax entered = labels.get(PermissionEntityCommand.class);
+			if (entered != null) {
+				String type = entered.getLabel();
+				if (type != null) {
+					type = type.toLowerCase();
+					if (type.equals("group")) {
+						return lookupGroup(resolution);
+					} else if (type.equals("user")) {
+						return lookupUser(resolution);
+					}
 				}
 			}
 		}

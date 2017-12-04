@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.permissions.entity.Entity;
-import com.ulfric.plugin.commands.Permission;
-import com.ulfric.plugin.commands.Restricted;
+import com.ulfric.plugin.commands.permissions.Permission;
+import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("reset")
 @Permission("permission.use.entity.parent.reset")

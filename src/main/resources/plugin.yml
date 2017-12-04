@@ -2,4 +2,4 @@ name: Permissions
 main: com.ulfric.plugin.permissions.PermissionsPlugin
 version: 1.0.0
 author: Ulfric LLC
-depend: [Platform, Services, Data, Locale, Commands]
+depend: [Platform, Services, Data, Locale, Commands, Restrictions]

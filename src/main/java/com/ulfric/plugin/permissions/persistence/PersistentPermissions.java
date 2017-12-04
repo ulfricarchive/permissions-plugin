@@ -53,7 +53,7 @@ public class PersistentPermissions implements PermissionsService {
 		User user = new User(uniqueId);
 		userCache.put(uniqueId, user);
 
-		return users.getAsynchronous(uniqueId)
+		return users.getAsynchronous(uniqueId.toString())
 				.thenApply(document -> {
 					loadEntity(document, user);
 					return user;

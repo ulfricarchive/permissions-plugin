@@ -1,8 +1,8 @@
 package com.ulfric.plugin.permissions.command;
 
 import com.ulfric.commons.naming.Name;
-import com.ulfric.plugin.commands.Permission;
-import com.ulfric.plugin.commands.Restricted;
+import com.ulfric.plugin.commands.permissions.Permission;
+import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("clear")
 @Permission("permission.use.entity.limit.clear")

@@ -2,9 +2,9 @@ package com.ulfric.plugin.permissions.command;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.permissions.limit.Limit;
-import com.ulfric.plugin.commands.Permission;
-import com.ulfric.plugin.commands.Restricted;
 import com.ulfric.plugin.commands.argument.Argument;
+import com.ulfric.plugin.commands.permissions.Permission;
+import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("set")
 @Permission("permission.use.entity.limit.set")

@@ -5,7 +5,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("clear")
-@Permission("permission.use.entity.node.clear")
+@Permission("permission-use-entity-node-clear")
 @Restricted("NodeClear")
 public class PermissionEntityNodeClearCommand extends PermissionEntityNodeCommand {
 

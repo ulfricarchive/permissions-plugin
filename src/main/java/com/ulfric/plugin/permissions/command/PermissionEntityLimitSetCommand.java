@@ -7,7 +7,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("set")
-@Permission("permission.use.entity.limit.set")
+@Permission("permission-use-entity-limit-set")
 @Restricted("LimitSet")
 public class PermissionEntityLimitSetCommand extends PermissionEntityLimitCommand {
 

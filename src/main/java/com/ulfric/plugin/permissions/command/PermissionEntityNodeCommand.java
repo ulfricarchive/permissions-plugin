@@ -6,7 +6,7 @@ import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.commands.permissions.Permission;
 
 @Name("node")
-@Permission("permission.use.entity.node")
+@Permission("permission-use-entity-node")
 public class PermissionEntityNodeCommand extends PermissionEntityCommand {
 
 	@Argument

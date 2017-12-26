@@ -7,7 +7,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("remove")
-@Permission("permission.use.entity.parent.remove")
+@Permission("permission-use-entity-parent-remove")
 @Restricted("ParentRemove")
 public class PermissionEntityParentRemoveCommand extends PermissionEntityParentCommand {
 

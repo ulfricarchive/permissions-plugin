@@ -7,7 +7,7 @@ import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.commands.permissions.Permission;
 
 @Name("test")
-@Permission("permission.use.entity.parent.test")
+@Permission("permission-use-entity-parent-test")
 public class PermissionEntityParentTestCommand extends PermissionEntityParentCommand {
 
 	@Argument

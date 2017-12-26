@@ -8,7 +8,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("reset")
-@Permission("permission.use.entity.parent.reset")
+@Permission("permission-use-entity-parent-reset")
 @Restricted("ParentReset")
 public class PermissionEntityParentResetCommand extends PermissionEntityParentCommand {
 

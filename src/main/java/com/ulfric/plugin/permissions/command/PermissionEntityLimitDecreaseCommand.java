@@ -8,7 +8,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("decrease")
-@Permission("permission.use.entity.limit.decrease")
+@Permission("permission-use-entity-limit-decrease")
 @Restricted("LimitDecrease")
 public class PermissionEntityLimitDecreaseCommand extends PermissionEntityLimitCommand {
 

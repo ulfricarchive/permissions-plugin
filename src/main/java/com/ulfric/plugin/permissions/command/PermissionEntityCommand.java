@@ -13,7 +13,7 @@ import com.ulfric.plugin.permissions.User;
 
 @Name("entity")
 @Alias({"ent", "group", "user"})
-@Permission("permission.use.entity")
+@Permission("permission-use-entity")
 public class PermissionEntityCommand extends PermissionCommand {
 
 	@Argument

@@ -7,7 +7,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 
 @Name("permission")
 @Alias("perm")
-@Permission("permission.use")
+@Permission("permission-use")
 public class PermissionCommand extends CommandHelp {
 
 }

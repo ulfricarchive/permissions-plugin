@@ -6,7 +6,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("grant")
-@Permission("permission.use.entity.node.grant")
+@Permission("permission-use-entity-node-grant")
 @Restricted("NodeGrant")
 public class PermissionEntityNodeGrantCommand extends PermissionEntityNodeCommand {
 

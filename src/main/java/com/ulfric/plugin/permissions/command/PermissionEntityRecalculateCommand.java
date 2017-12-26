@@ -6,7 +6,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 
 @Name("recalculate")
 @Alias("recalc")
-@Permission("permission.use.entity.recalculate")
+@Permission("permission-use-entity-recalculate")
 public class PermissionEntityRecalculateCommand extends PermissionEntityCommand {
 
 	@Override

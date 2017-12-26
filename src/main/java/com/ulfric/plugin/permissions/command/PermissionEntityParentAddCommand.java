@@ -7,7 +7,7 @@ import com.ulfric.plugin.commands.permissions.Permission;
 import com.ulfric.plugin.restrictions.command.Restricted;
 
 @Name("add")
-@Permission("permission.use.entity.parent.add")
+@Permission("permission-use-entity-parent-add")
 @Restricted("ParentAdd")
 public class PermissionEntityParentAddCommand extends PermissionEntityParentCommand {
 

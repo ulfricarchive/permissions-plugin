@@ -6,7 +6,7 @@ import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.commands.permissions.Permission;
 
 @Name("limit")
-@Permission("permission.use.entity.limit")
+@Permission("permission-use-entity-limit")
 public class PermissionEntityLimitCommand extends PermissionEntityCommand {
 
 	@Argument
